@@ -1,17 +1,49 @@
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QFileDialog, QPushButton, QLabel, QApplication, QLineEdit, QWidget
-import os
-import fitz
-from pdf_to_text_converter import PdfToTxtConverter
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QWidget, QVBoxLayout
+from PyQt5.QtGui import QIcon
+from intro_tab import IntroTab
+from pdf_to_text_converter import PdfToTxtConversionTab
 
 
-def main():
-    app = QApplication([])
-    converter = PdfToTxtConverter()
-    # Use a QTimer to schedule the conversion after the event loop starts
-    # QTimer.singleShot(0, converter.convert_pdf)
-    app.exec_()
+class MainApplication(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setGeometry(600, 200, 425, 400)
+        self.setWindowTitle('PDF Alchemy')
+
+        icon_path = 'Orange_Alchemy.PNG'
+        self.setWindowIcon(QIcon(icon_path))
+        self.setStyleSheet("background-color: Orange;")
+
+        # Create an instance of PdfToTxtConversionTab
+        pdf_to_txt_tab = PdfToTxtConversionTab()
+
+        # Create an instance of IntroTab
+        intro_tab = IntroTab()
+
+        # Create a tab widget
+        tab_widget = QTabWidget(self)
+        tab_widget.addTab(intro_tab, 'Introduction')
+        tab_widget.addTab(pdf_to_txt_tab, 'PDF -> TXT')
+
+        # Apply styles to the QTabBar (tabs)
+        tab_widget.setStyleSheet(
+            "QTabBar::tab { min-width: 100px; min-height: 50px; }"  # Adjust the values as needed
+            "QTabBar::tab:selected { background-color: cyan; color: Black; font-weight: bold; }"
+            "QTabBar::tab:!selected { background-color: LightGray; color: Black; font-weight: normal; }"
+        )
+
+        # Set up the layout
+        layout = QVBoxLayout()
+        layout.addWidget(tab_widget)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
 
 
 if __name__ == '__main__':
-    main()
+    app = QApplication([])
+    main_app = MainApplication()
+    main_app.show()
+    app.exec_()

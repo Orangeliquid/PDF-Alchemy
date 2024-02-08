@@ -1,65 +1,51 @@
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QFileDialog
 from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QFileDialog, QPushButton, QLabel, QApplication, QLineEdit, QWidget
 import os
 import fitz
 
 
-class PdfToTxtConverter(QWidget):
-    """
-    A PyQt5-based GUI application for converting PDF files to TXT format.
-
-    Attributes:
-        pdf_file_path (str): The path of the selected PDF file.
-
-    Methods:
-        browse_pdf(): Opens a file dialog to browse and select a PDF file.
-        convert_pdf(): Converts the selected PDF file to a TXT file.
-
-    Signals:
-        None
-    """
+class PdfToTxtConversionTab(QWidget):
     def __init__(self):
-        """
-        Initializes the PdfToTxtConverter GUI application.
-
-        Sets up the main window, labels, buttons, and connections.
-        """
         super().__init__()
-
-        self.setGeometry(100, 100, 500, 300)
-        self.setWindowTitle('PDF Alchemy')
 
         self.lbl_file = QLabel('Selected PDF file:', self)
         self.lbl_file.setGeometry(20, 40, 300, 20)
+        self.lbl_file.setStyleSheet("color: Black; font-weight: Bold;")
 
         self.file_path_display = QLineEdit(self)
         self.file_path_display.setGeometry(20, 70, 300, 20)
         self.file_path_display.setReadOnly(True)
+        self.lbl_file.setStyleSheet("color: Black; font-weight: Bold;")
 
         self.btn_browse = QPushButton('Browse', self)
         self.btn_browse.setGeometry(20, 100, 80, 30)
         self.btn_browse.clicked.connect(self.browse_pdf)
+        self.btn_browse.setStyleSheet("background-color: Black; color: Orange; font-weight: Bold;")
 
-        self.lbl_output = QLabel('Enter the output file name (without extension):', self)
-        self.lbl_output.setGeometry(20, 150, 300, 20)
+        self.lbl_output = QLabel('After pressing "Convert"\n'
+                                 'Enter the output file name (without extension):', self)
+        self.lbl_output.setGeometry(20, 150, 300, 40)
+        self.lbl_output.setStyleSheet("color: Black; font-weight: Bold;")
 
         self.txt_output = QLabel(self)
-        self.txt_output.setGeometry(20, 180, 300, 35)
+        self.txt_output.setGeometry(20, 200, 400, 35)
+        self.txt_output.setStyleSheet("color: Black; font-weight: Bold;")
 
         self.btn_convert = QPushButton('Convert', self)
         self.btn_convert.setGeometry(20, 250, 80, 30)
         self.btn_convert.clicked.connect(self.convert_pdf)
+        self.btn_convert.setStyleSheet("background-color: Black; color: Orange; font-weight: Bold;")
 
         self.pdf_file_path = None
+
+        self.setup_ui()
+
+    def setup_ui(self):
+        self.setStyleSheet("background-color: Orange;")
 
         self.show()
 
     def browse_pdf(self):
-        """
-        Opens a file dialog to browse and select a PDF file.
-
-        Sets the selected PDF file path and updates the display.
-        """
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self, 'Open PDF File', '', 'PDF Files (*.pdf);;All Files (*)',
                                                    options=options)
@@ -71,11 +57,6 @@ class PdfToTxtConverter(QWidget):
             self.txt_output.setText('')
 
     def convert_pdf(self):
-        """
-        Converts the selected PDF file to a TXT file.
-
-        Prompts the user to provide an output file name and performs the conversion.
-        """
         print("convert_pdf method called")
         print(f"self.pdf_file_path: {self.pdf_file_path}")
         if hasattr(self, 'pdf_file_path'):
