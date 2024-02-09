@@ -15,7 +15,7 @@ class PdfToTxtConversionTab(QWidget):
         self.file_path_display = QLineEdit(self)
         self.file_path_display.setGeometry(20, 70, 300, 20)
         self.file_path_display.setReadOnly(True)
-        self.lbl_file.setStyleSheet("color: Black; font-weight: Bold;")
+        self.file_path_display.setStyleSheet("color: Black;")
 
         self.btn_browse = QPushButton('Browse', self)
         self.btn_browse.setGeometry(20, 100, 80, 30)
@@ -42,7 +42,6 @@ class PdfToTxtConversionTab(QWidget):
 
     def setup_ui(self):
         self.setStyleSheet("background-color: Orange;")
-
         self.show()
 
     def browse_pdf(self):
