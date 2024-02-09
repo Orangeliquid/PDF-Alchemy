@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QWidget, QVBo
 from PyQt5.QtGui import QIcon
 from intro_tab import IntroTab
 from pdf_to_text_converter import PdfToTxtConversionTab
+from txt_to_mp3_converter import TxtToMp3ConversionTab
 
 
 class MainApplication(QMainWindow):
@@ -15,16 +16,20 @@ class MainApplication(QMainWindow):
         self.setWindowIcon(QIcon(icon_path))
         self.setStyleSheet("background-color: Orange;")
 
+        # Create an instance of IntroTab
+        intro_tab = IntroTab()
+
         # Create an instance of PdfToTxtConversionTab
         pdf_to_txt_tab = PdfToTxtConversionTab()
 
-        # Create an instance of IntroTab
-        intro_tab = IntroTab()
+        # Create an instance of
+        txt_to_mp3_tab = TxtToMp3ConversionTab()
 
         # Create a tab widget
         tab_widget = QTabWidget(self)
         tab_widget.addTab(intro_tab, 'Introduction')
         tab_widget.addTab(pdf_to_txt_tab, 'PDF -> TXT')
+        tab_widget.addTab(txt_to_mp3_tab, 'TXT -> MP3')
 
         # Apply styles to the QTabBar (tabs)
         tab_widget.setStyleSheet(
