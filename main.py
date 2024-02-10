@@ -9,7 +9,7 @@ class MainApplication(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(600, 200, 425, 400)
+        self.setGeometry(600, 200, 525, 500)
         self.setWindowTitle('PDF Alchemy')
 
         icon_path = 'Orange_Alchemy.PNG'
