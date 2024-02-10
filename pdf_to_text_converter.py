@@ -9,32 +9,36 @@ class PdfToTxtConversionTab(QWidget):
         super().__init__()
 
         self.lbl_file = QLabel('Selected PDF file:', self)
-        self.lbl_file.setGeometry(20, 40, 300, 20)
-        self.lbl_file.setStyleSheet("color: Black; font-weight: Bold;")
+        self.lbl_file.setGeometry(20, 20, 300, 20)
+        self.lbl_file.setStyleSheet("font-size: 15px; color: Black; font-weight: Bold;")
 
         self.file_path_display = QLineEdit(self)
-        self.file_path_display.setGeometry(20, 70, 300, 20)
+        self.file_path_display.setGeometry(20, 50, 500, 30)
         self.file_path_display.setReadOnly(True)
-        self.file_path_display.setStyleSheet("color: Black;")
+        self.file_path_display.setStyleSheet("font-size: 12px; font-weight:Bold; color: Black;")
 
         self.btn_browse = QPushButton('Browse', self)
-        self.btn_browse.setGeometry(20, 100, 80, 30)
+        self.btn_browse.setGeometry(20, 100, 100, 30)
         self.btn_browse.clicked.connect(self.browse_pdf)
-        self.btn_browse.setStyleSheet("background-color: Black; color: Orange; font-weight: Bold;")
+        self.btn_browse.setStyleSheet("font-size: 15px; background-color: Black; color: Cyan; font-weight: Bold;")
+
+        self.browse_hint = QLabel('<--- Select PDF file to convert to TXT', self)
+        self.browse_hint.setGeometry(130, 95, 350, 40)
+        self.browse_hint.setStyleSheet("font-size: 15px; color: Black; font-weight: Bold;")
 
         self.lbl_output = QLabel('After pressing "Convert"\n'
-                                 'Enter the output file name (without extension):', self)
-        self.lbl_output.setGeometry(20, 150, 300, 40)
-        self.lbl_output.setStyleSheet("color: Black; font-weight: Bold;")
-
-        self.txt_output = QLabel(self)
-        self.txt_output.setGeometry(20, 200, 400, 35)
-        self.txt_output.setStyleSheet("color: Black; font-weight: Bold;")
+                                 'Enter the output file name (without extension)', self)
+        self.lbl_output.setGeometry(20, 170, 350, 40)
+        self.lbl_output.setStyleSheet("font-size: 15px; color: Black; font-weight: Bold;")
 
         self.btn_convert = QPushButton('Convert', self)
-        self.btn_convert.setGeometry(20, 250, 80, 30)
+        self.btn_convert.setGeometry(20, 230, 100, 30)
         self.btn_convert.clicked.connect(self.convert_pdf)
-        self.btn_convert.setStyleSheet("background-color: Black; color: Orange; font-weight: Bold;")
+        self.btn_convert.setStyleSheet("font-size: 15px; background-color: Black; color: Cyan; font-weight: Bold;")
+
+        self.txt_output = QLabel(self)
+        self.txt_output.setGeometry(20, 280, 500, 100)
+        self.txt_output.setStyleSheet("font-size: 18px; font-weight: Italic; color: Cyan;")
 
         self.pdf_file_path = None
 
@@ -79,8 +83,8 @@ class PdfToTxtConversionTab(QWidget):
                             QCoreApplication.processEvents()
 
                     # Inside convert_pdf method
-                    self.txt_output.setText(f'Conversion successful! Saved as: {os.path.basename(output_name)}.txt\n'
-                                            f'Minimize or close application to see .txt file in working directory!')
+                    self.txt_output.setText(f'Conversion successful! Saved as: {os.path.basename(output_name)}.txt\n\n'
+                                            f'Minimize or close application to see \n.txt file in working directory!')
 
                 except Exception as e:
                     print(f"Error during PDF conversion: {e}")
