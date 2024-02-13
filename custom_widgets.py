@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QProgressBar
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QProgressBar
+
 
 class CustomProgressBar(QWidget):
     def __init__(self, parent=None):

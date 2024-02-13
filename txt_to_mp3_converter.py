@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QFileDialog, QVBoxLayout
-from PyQt5.QtCore import QCoreApplication, QTimer, QThread, pyqtSignal, Qt
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QFileDialog
+from PyQt5.QtCore import QCoreApplication, QThread, pyqtSignal
 import os
 from gtts import gTTS
 from custom_widgets import CustomProgressBar
@@ -21,9 +21,7 @@ class Mp3ConversionWorker(QThread):
     # Additionally I need to allow the user to enter a name for the new mp3 file instead of output.mp3
     def run(self):
         try:
-            tts = gTTS(text=self.text_to_convert, lang='en', slow=False)  # May be able to remove - unused
             total_chars = len(self.text_to_convert)
-            num_chunks = total_chars // self.chunk_size  # May be able to remove - unused
             self.progress_update.emit(0)
 
             chunk_files = []
